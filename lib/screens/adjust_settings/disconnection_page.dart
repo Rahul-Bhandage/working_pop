@@ -209,9 +209,8 @@ class _DisconnectDevices extends State<DisconnectDevices> {
       });
     }
     print("length of device disconnecting ${discoveredBluetoothDevicesList.length}");
-    Timer( Duration(seconds:discoveredBluetoothDevicesList.length), () {
         Navigator.pushReplacementNamed(context, UserAccount.routeName,arguments:  {"popid":0,"disclist":discoveredBluetoothDevicesList});
-    });
+
 
   }
 
