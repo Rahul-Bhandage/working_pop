@@ -81,6 +81,7 @@ class _ScanDevices extends State<ScanDevices> {
     sec_counter=0;
     startScanner();
 
+
     // _counter=Timer.periodic(Duration(seconds: 1), (timer) {
     //   setState(() {
     //     sec_counter++;
@@ -449,18 +450,26 @@ class _ScanDevices extends State<ScanDevices> {
           chh = chhh;
         }
       });
+
+      if(d1.isNotEmpty)
+        {
+          for(int i = 0 ; i < d1.length ; i++ )
+            {
+              connection(d1[i]);
+            }
+        }
     // print("ch1 $ch1 ");
     print("discoveredBluetoothDevicesList length ${discoveredBluetoothDevicesList.length}");
-    if (ch1.length==discoveredBluetoothDevicesList.length) {
-      print("ch list we are sending $ch1");
-
-
-      Navigator.pushReplacementNamed(context, AdjustSettingsHome.routeName,
-          arguments: {
-            'ch': ch1,
-            "disclist": discoveredBluetoothDevicesList
-          });
-    }
+    // if (ch1.length==discoveredBluetoothDevicesList.length) {
+    //   print("ch list we are sending $ch1");
+    //
+    //
+    //   Navigator.pushReplacementNamed(context, AdjustSettingsHome.routeName,
+    //       arguments: {
+    //         'ch': ch1,
+    //         "disclist": discoveredBluetoothDevicesList
+    //       });
+    // }
 
     print("Length of ch ${ch1.length}");
   }
@@ -477,7 +486,7 @@ class _ScanDevices extends State<ScanDevices> {
       if(event==BluetoothConnectionState.disconnected) {
         state=false;
         flag=1;
-        d1.add(device);
+        // d1.add(device);
         print(state);
       }
       else  if(event==BluetoothConnectionState.connecting)
@@ -507,6 +516,15 @@ class _ScanDevices extends State<ScanDevices> {
     for (int i=0;i<discoveredBluetoothDevicesList.length;i++){
       print("Device ${discoveredBluetoothDevicesList[i].device.remoteId} ");
       await connection(discoveredBluetoothDevicesList[i].device);
+      if(i==discoveredBluetoothDevicesList.length-1)
+        {
+
+          Navigator.pushReplacementNamed(context, AdjustSettingsHome.routeName,
+              arguments: {
+                'ch': ch1,
+                "disclist": discoveredBluetoothDevicesList
+              });
+        }
     }
 
   }
