@@ -86,7 +86,12 @@ class _AdjustSettingsHomeState extends State<AdjustSettingsHome> {
   @override
   void initState() {
     generateMinutesToBleCommandMap();
+    Timer(Duration(milliseconds: 1000),()
+    {
+      setState(() {
 
+      });
+    });
     subscription = FGBGEvents.stream.listen((event) async {
       if (event == FGBGType.foreground) {
         print("APP IN FOREGROUND ");
